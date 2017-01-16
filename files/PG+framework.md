@@ -6,7 +6,7 @@ Start by creating a new project in Xcode:
 * Swift
 * name: **FW**
 
-Select the FW folder:
+Select the FW *folder*
 
 ![](figs/folder_selected.png)
 
@@ -20,12 +20,13 @@ New > File > New
 ```css
 public class Talk {
     public class func hello() -> String {
+        print("hi there")
         return "Hello from FW"
     }
 }
 ```
 
-I couldn't get **print** to work, but returning a value is more useful, anway.
+I couldn't get **print** to work into the Playground output, but returning a value is more useful, anway.
 
 * Build the project
 
@@ -35,21 +36,22 @@ With the project selected,
 
 Do 
 
-* save as Workspace
+* save as File > Workspace
+
+![](figs/save_workspace.png) 
+
 * name:  **FW.xcworkspace**
 
 Create a new Playground
 
-Save it inside the project folder next to the Swift files.  We do save here:
-
-![](figs/save_playground.png)
-
-You must still add the Playground to the project:
+Save it inside the project folder next to the Swift files.  We do the save here:
 
 ![](figs/add_to_project.png)
 
-by doing AddToProject and navigating to the Playground file.
+You must still add the Playground to the project.  Click on the *project* tab and do File > AddFiles and navigate to the Playground file.
 
+![](figs/save_playground.png)
+ 
 Build the FW project again.
 
 In the playground:
@@ -61,11 +63,21 @@ import FW
 Talk.hello()
 ```
 
-Result:
+[ ``hello`` by itself won't work.]
 
-```css
-Hello from FW
-```
+![](figs/not_just_hello.png)
 
-If you have issues issues make sure that in your
-Xcode Preferences:  Locations > Advanced > confuration is 'Unique'.
+It works!  The ``print`` statement  in the Framework shows up in the Debug area.  ``
+
+![](figs/playground_talks.png)
+
+If you have issues make sure that in your
+Xcode Preferences:  Locations > Advanced > configuration is 'Unique'.
+
+Note:  you must have the Xcode project open and click on the playground in the project navigator.  You can't just open the Playground from the Finder, like here:
+
+![](figs/save_playground.png)
+
+If you do that you'll get the dreaded:
+
+![](figs/no_such_module.png)

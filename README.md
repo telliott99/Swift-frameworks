@@ -68,9 +68,9 @@ For the difference between static and dynamic libraries see [here](http://stacko
 
 ### Swift
 
-####12:  [Swift code](files/swift_code.md) from the command line
+####12:  [Swift framework](files/swift_code.md) called by Swift at the command line
 
-####13:  [Swift frameworks generally](files/swift_frameworks.md)
+####13:  [Swift frameworks](files/swift_frameworks.md) generally
 
 <hr>
 
