@@ -1,6 +1,6 @@
-#### Method 7:  Use a standard OS X framework from the command line:
+#### Method 8:  Use a standard OS X framework from the command line:
 
-**test2.m**
+**test.m**
 
 ```objc
 #import <Foundation/Foundation.h>
@@ -14,9 +14,9 @@ int main (int argc, const char* argv[]) {
 command line:
 
 ```bash
-> clang -o test test2.m -framework Foundation
+> clang -o test test.m -framework Foundation
 > ./test
-2017-01-13 21:11:54.506 test[7792:197260] telliott_admin
+2017-01-15 20:49:32.385 test[9705:257881] telliott_admin
 >
 ```
 

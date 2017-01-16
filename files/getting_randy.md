@@ -4,9 +4,11 @@ This is not numbered as a method, but it seems to fit here.  In Swift3, the vene
 
 While I'm sure there are good reasons for this (namely cryptographic safety), it's bad for hobbyist programmers because the preferred function ``arc4random`` is not seedable --- by design.
 
-I think it's much better not to worry about our "random" numbers not being reproducible between runs, when testing new code.
+I think it's much better to have "random" numbers reproducible between runs, when testing new code, rather than insist on safety in this case.
 
 Here is how to recover these functions for use in your Swift code.
+
+First, we simply "wrap" the C library functions.
 
 **funcs.c**
 
@@ -20,7 +22,10 @@ int rand2() {
 void srand2(int x) {
     srand(x);
 }
+
 ```
+
+A header declares the prototypes:
 
 **funcs.h**
 
@@ -28,6 +33,8 @@ void srand2(int x) {
 int rand2();
 void srand2(int x);
 ```
+
+And we test by calling from:
 
 **test.c**
 
@@ -51,6 +58,7 @@ int main(int argc, char** argv){
 }
 
 ```
+We do a quick test from the command line:
 
 ```bash
 > clang -g -Wall -c funcs.c
@@ -65,9 +73,15 @@ int main(int argc, char** argv){
 >
 ``` 
 
-Now, one approach is to turn this into an Objective-C framework.
+Having seeded the PRNG, we get the same three random numbers (mod 500) for two runs in a row.
 
-Make a new Cocoa project called **MyRand**, a framework, in Objective-C.  Copy ``funcs.c`` to the directory in the project that holds source files.  From Xcode, add the file to the project (with the folder selected, not the project).
+<hr>
+
+Now, one approach would be to turn this into an Objective-C framework.
+
+Make a new Cocoa project called **MyRand**, a framework, in Objective-C.  
+
+Copy ``funcs.c`` to the directory in the project that holds source files.  From Xcode, add the file to the project (with the folder selected, not the project).
 
 Copy these declarations into ``MyRand.h``
 
@@ -101,6 +115,8 @@ Call it from C code on the command line:
 >
 ```
 
+It works.
+
 Now write
 
 **test.swift**
@@ -109,8 +125,13 @@ Now write
 import MyRand
 
 srand2(133)
-for _ in 0..<5 {
-    print(rand2() % 50)
+for _ in 0..<3 {
+    print(rand2() % 500)
+}
+print("--------")
+srand2(133)
+for _ in 0..<3 {
+    print(rand2() % 500)
 }
 
 let x = rand2()
@@ -119,13 +140,16 @@ print(type(of: x))
 
 ```bash
 > xcrun swiftc test.swift -o prog -F ~/Library/Frameworks -sdk $(xcrun --show-sdk-path --sdk macosx) && ./prog
-31
-18
+331
+118
 9
-47
-0
+--------
+331
+118
+9
 Int32
->
+> 
 ```
+I think those numbers look familiar.
 
 These functions are available in a Swift Cocoa app.  To use them in a Playground is more work, but we'll get there eventually.

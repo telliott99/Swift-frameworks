@@ -1,4 +1,4 @@
-### Swift code from the command line
+#### Method 10:  Swift code from the command line
 
 Even for small projects, it is nice to have the ability to split up your code into several files.
 
@@ -27,7 +27,7 @@ var s = "a$b#c."
 print(s.stripCharacters(input: "$#."))
 ```
 
-This name for the main file is required.  On the command line:
+The name ``main.swift`` for the main file is required.  On the command line:
 
 ```bash
 > swiftc stringStuff.swift main.swift -o prog && ./prog

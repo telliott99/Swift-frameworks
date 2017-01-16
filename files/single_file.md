@@ -17,6 +17,7 @@ int main(int argc, char** argv){
     printf("  main %d\n", f1(1));
     return 0;
 }
+
 ```
 command line:
 
@@ -25,14 +26,23 @@ command line:
 test:
 f1: 1;  main 2
 >
-
-Note:  if you're not used to doing this, we've combined two different commands here.  The second one comes after the ``&&`` and calls
-
-```bash
-./prog
 ```
 
-even though the program is ``prog``.  The reason is that invoking ``prog`` directly doesn't work.  
+Note:  if you're not used to doing this, we've combined two different commands here.  
 
-We reference ``prog`` in the current directory ``.`` with ``./prog``.
+We could have done them separately as
+
+```bash
+> clang -g -Wall test.c -o prog
+> ./prog
+test:
+f1: 1;  main 2
+>
+```
+
+Even though the filename for the compiled program is ``prog`` (as requested with the ``-o`` flag to the compiler) we have to add something in front.
+
+Invoking ``prog`` directly doesn't work.  
+
+We reference ``prog`` in the current directory ``.`` and make the command:  ``./prog``, which is simply the path to the ``prog`` file.
 

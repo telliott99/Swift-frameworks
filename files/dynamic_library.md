@@ -1,10 +1,7 @@
-#### Method 5:  dynamic library from ~/Library/Frameworks
+#### Method 7:  dynamic library
 
-Clean up first.
-
-```bash
-> rm -r * && cp ../src/* . && ls
-```
+Clean up first.  But save the source files!  :)
+Ask me how I know.
 
 ```bash
 > clang -g -Wall -c add*.c
@@ -31,7 +28,7 @@ libadd.dylib:
 >
 ```
 
-To use it we *may* also compile `useadd.c` to an object .o file.
+We *may* also compile `useadd.c` to an object .o file.
 
 ```bash
 > clang -c useadd.c
@@ -44,3 +41,12 @@ f2: 10;  main 20
 ```
 
 We can also copy ``libadd.dylib`` to the Frameworks directory and import it like we did before.
+
+```bash
+> cp libadd.dylib ~/Library/Frameworks
+> clang useadd.c -o useadd ./libadd.dylib -L/Users/telliott_admin/Library/Frameworks
+> ./useadd
+f1: 1;   main 2
+f2: 10;   main 12
+>
+```

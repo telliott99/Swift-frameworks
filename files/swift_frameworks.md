@@ -6,26 +6,32 @@ In Xcode do:
 
 * OS X > New Project > Cocoa Framework > Swift
 
-* name:  StringStuff.framwork
+* name:  StringStuff
 
 * Add the Swift file stringStuff.swift
+
+```swift
+import Foundation
+
+public extension String {
+    public func stripCharacters(input: String) -> String {
+        let badChars = input.characters
+        let ret = self.characters.filter {
+            !badChars.contains($0) }
+        return String(ret)
+    }
+}
+```
 
 * Build it
 
 * Under Products, find StringStuff.framework
 
-* Control-click to Show In Finder, drag to Desktop
-
-
-Finally
-
-```css
-cp -r StringStuff.framework ~/Library/Frameworks
-```
+* Control-click to Show In Finder, drag to ``~/Library/Frameworks``.
 
 To use the new Framework
 
-**x.swift**:
+**test.swift**:
 
 ```swift
 import StringStuff
@@ -36,7 +42,7 @@ print(s.stripCharacters(input: "$#"))
 From the command line:
 
 ```bash
-xcrun swiftc x.swift -F ~/Library/Frameworks -sdk $(xcrun --show-sdk-path --sdk macosx)
+xcrun swiftc test.swift -F ~/Library/Frameworks -sdk $(xcrun --show-sdk-path --sdk macosx)
 ```
 
 This should work but fails with an error:
@@ -49,13 +55,27 @@ import StringStuff
 
 I will show how to fix this problem below.
 
-Meanwhile, I made a new Xcode project.  I added the String Stuff Famework to "Linked Frameworks and Libraries" following the instructions [here](http://telliott99.blogspot.com/2015/12/building-and-using-framework-in-swift.html):
+<hr>
 
-I put the three lines of code from above into the **AppDelegate**.  When built and run, it logs what we expect to the Debug area.
+Meanwhile, I made a new Xcode app, **AnotherApp**.  I added the String Stuff Famework to "Linked Frameworks and Libraries" as usual.
+
+I put the three lines of code from above
+
+```swift
+import StringStuff
+```
+into the **AppDelegate** after ``import Cocoa`` and into **applicationDidFinishLaunching**
+
+```swift
+let s = "a$b#c"
+print(s.stripCharacters(input: "$#"))
+```
+
+  When built and run, it logs what we expect to the Debug area.
 
 ## Command line and target
 
-Our current situation is that when **x.swift** is contained in an Xcode project it can find and use the StringStuff Framework from ``~/Library/Frameworks/StringStuff.framework``, but when we try from the command line it fails.
+Our current situation is that when **test.swift** is contained in an Xcode project it can find and use the StringStuff Framework from ``~/Library/Frameworks/StringStuff.framework``, but when we try from the command line it fails.
 
 Some good advice, which I found [here](http://onebigfunction.com/tools/2015/02/03/xcrun-execute-xcode-tasks-from-command-line/), is to examine the commands Xcode issued to compile **x.swift**.  
 
@@ -70,8 +90,8 @@ One of the very first flags to the compiler is
 Let's try it:
 
 ```bash
-> xcrun swiftc x.swift -F ~/Library/Frameworks -sdk $(xcrun --show-sdk-path --sdk macosx) -target x86_64-apple-macosx10.12
-> ./x
+> xcrun swiftc test.swift -F ~/Library/Frameworks -sdk $(xcrun --show-sdk-path --sdk macosx) -target x86_64-apple-macosx10.12
+> ./test
 abc
 >
 ```
@@ -107,7 +127,7 @@ public func nRandomBytes(_ count: Int = 4) -> [UInt8]
 public func testDataHelper()
 ```
 
-To test it, I made a new Cocoa app and linked to the Framework.  To do this, just click on the project icon:
+To test it, I made a new Cocoa app **YetAnotherApp* and linked to the Framework.  To do this, just click on the project icon:
 
 ![](figs/project_icon.png)
 
@@ -117,7 +137,7 @@ and then click on the "+" in Linked Frameworks
 
 and navigate to the Framework.
 
-I wrote a small class
+Do File > New > File and add this Swift file:
 
 **Test.swift**:
 
@@ -145,7 +165,7 @@ One detail is that the import of DataHelper must be in the same file as where th
 
 Also, here we have a minimal example of a "convenience" **init** function.
 
-Put this code into either the **AppDelegate** or **Text.swift**
+Put this code into either the **AppDelegate** or **Test.swift**
 
 ```swift
 func test() {
@@ -155,6 +175,7 @@ func test() {
         print(d2)
     }
 ```
+Call it from the AppDelegate.
 
 When built and run, it will log:
 
@@ -181,3 +202,5 @@ e344a9e41c73830117c4322318a923b4c6bdd64ab735c2fd
 [24, 169, 35, 180, 198, 189, 214, 74, 183, 53, 194, 253]
 >
 ```
+
+These random data do not come from a seeded PRNG so you will definitely see something different.

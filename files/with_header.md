@@ -7,6 +7,7 @@
 ```c
 int f1(int);
 int f2(int);
+
 ```
 
 **add1.c**
@@ -18,6 +19,7 @@ int f1(int x) {
     printf( "f1: %d; ", x );
     return x+1;
 }
+
 ```
 
 **add2.c**
@@ -29,6 +31,7 @@ int f2(int x) {
     printf( "f2: %d; ", x );
     return x+2;
 }
+
 ```
 
 **useadd.c**
@@ -42,21 +45,23 @@ int main(int argc, char** argv){
     printf("  main %d\n", f2(10));
     return 0;
 }
+
 ```
-Build them
+Build both the **add** files:
 
 ```bash
 > clang -g -Wall -c add*.c
-> 
+> ls *.o
+add1.o	add2.o
+>
 ```
 
-to generate **add1.o** and **add2.o**.  Then
+We have generated **add1.o** and **add2.o**.  Then
 
 ```bash
 > clang -g -Wall useadd.c add1.o add2.o -o useadd
 > ./useadd
-useadd
-f1: 1;  main 2
-f2: 10;  main 12
+f1: 1;   main 2
+f2: 10;   main 12
 >
 ```
