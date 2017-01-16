@@ -1,8 +1,8 @@
 ####Method 5:  Objective-C app
 
-* Now, make a new Xcode project, a Cocoa app called **Myapp** on the Desktop, written in **Objective-C**. 
+* Now, make a new Xcode project, a Cocoa app called **UseStaticLib** on the Desktop, choose **Objective-C** for the language. 
 
-Add the library to the project by clicking + on Linked Frameworks and Libraries, with the project selected in the project navigator.
+Link the library to the project by clicking + on Linked Frameworks and Libraries, with the project selected in the project navigator.
 
 ![](figs/linked.png)
 
@@ -12,7 +12,9 @@ Add other
 
 Navigate to ```~/Library/Frameworks/libadd.a``` and select it.
 
-* Add the header file ``add.h`` to the new Cocoa project.  One good way to do this is to first copy the file into the project directory that contains source files, and then add it by using AddFiles.  Be sure the folder and not the project is selected in the sidebar.
+![](figs/libadd_a_fw.png)
+
+* Add the header file ``add.h`` to the new Cocoa project.  One good way to do this is to first copy the file into the project directory that contains source files, and then add it by using AddFiles..  Be sure the folder and not the project is selected in the sidebar.
 
 ![](figs/folder_selected2.png) 
 

@@ -1,8 +1,15 @@
-The first thing is to make two directories on the Desktop:
+The first thing is to clean up the Desktop
 
 ```bash
 > cd Desktop
-> mkdir build
+> ls
+>
+```
+
+And make a directory to hold our source files:
+
+
+```bash
 > mkdir src
 ```
 
@@ -16,12 +23,13 @@ add.h		add2.c		useadd.c
 add1.c		test.c
 ```
 
-To perform any of the steps ahead, we work in the ``build`` directory, erasing the whole thing before we start, then copying in the files from ``src`` each time:
+To perform any of the steps ahead, we work on the Desktop, removing all old files before we start, then copying in the files from ``src`` each time:
 
 ```bash
 > cd build
-> rm -r * && cp ../src/* . && ls
-add.h		add2.c		useadd.c
-add1.c		test.c
->
+> > rm *
+rm: src: is a directory
+> 
 ```
+
+All the files (but not ``src``) will be removed.
