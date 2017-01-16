@@ -64,6 +64,7 @@ Talk.hello()
 ```
 
 [ ``hello`` by itself won't work.]
+<<<<<<< HEAD
 
 ![](figs/not_just_hello.png)
 
@@ -80,4 +81,22 @@ Note:  you must have the Xcode project open and click on the playground in the p
 
 If you do that you'll get the dreaded:
 
+=======
+
+![](figs/not_just_hello.png)
+
+It works!  The ``print`` statement  in the Framework shows up in the Debug area.  ``
+
+![](figs/playground_talks.png)
+
+If you have issues make sure that in your
+Xcode Preferences:  Locations > Advanced > configuration is 'Unique'.
+
+Note:  you must have the Xcode project open and click on the playground in the project navigator.  You can't just open the Playground from the Finder, like here:
+
+![](figs/save_playground.png)
+
+If you do that you'll get the dreaded:
+
+>>>>>>> finishing up
 ![](figs/no_such_module.png)
