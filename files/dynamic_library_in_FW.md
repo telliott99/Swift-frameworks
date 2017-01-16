@@ -95,7 +95,11 @@ It only works because ``DYLD_LIBRARY_PATH`` is set.
 To actually build/run this, it helps to use a directory that the linker searches.  I found one that works (of course!):  ``/usr/local/lib``
 
 ```bash
+<<<<<<< HEAD
+> cp ~/Desktop/libadd.dylib /usr/local/lib
+=======
 > mv ~/Desktop/libadd.dylib /usr/local/lib
+>>>>>>> no message
 > ./useadd
 f1: 1;   main 2
 f2: 10;   main 12
