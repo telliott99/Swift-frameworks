@@ -1,4 +1,4 @@
-#### Method:  Dynamic library in ~/Library/Frameworks
+#### Method:  Dynamic library in ~/Library/Frameworks or /usr/local/lib
 
 We would like to be able to copy ``libadd.dylib`` to the Frameworks directory and import it like we did before. 
 
@@ -90,20 +90,57 @@ f2: 10;   main 12
 
 It only works because ``DYLD_LIBRARY_PATH`` is set.
 
-To actually build and link:
+### /usr/local/lib
+
+To actually build/run this, it helps to use a directory that the linker searches.  I found one that works (of course!):  ``/usr/local/lib``
 
 ```bash
-> clang useaddext.c -ladd -L$fw -I$fw -o useadd
-```
-That should work, and I thought it worked, but it isn't working now.  So I guess that means it doesn't work.  
-
-Currently, the only way to fix this that I know is:
-
-```bash
-> export DYLD_LIBRARY_PATH=$fw
+> mv ~/Desktop/libadd.dylib /usr/local/lib
 > ./useadd
 f1: 1;   main 2
 f2: 10;   main 12
 >
 ```
+We can also build against the library in that location, if we specify the path correctly:
+
+```bash
+> clang useaddext.c -ladd -L/usr/local/lib -o useadd && ./useadd
+f1: 1;   main 2
+f2: 10;   main 12
+>
+```
+
+So that's the answer to that!  If we still have ``add.h`` rather than declaring the functions in our code, we would need to have the header file in ``/usr/local/include`` (or on the Desktop).  With the library in ``/usr/local/lib`` and the header on the Desktop:
+
+Switch out ``useadd.c`` for ``useaddext.c``
+
+```bash
+> clang useadd.c -ladd -L/usr/local/lib -o useadd 
+> ./useadd
+f1: 1;   main 2
+f2: 10;   main 12
+>
+```
+
+If the header is hidden
+
+```bash
+> clang useadd.c -ladd -L/usr/local/lib -o useadd 
+useadd.c:2:9: fatal error: 'add.h' file not found
+#import "add.h"
+        ^
+1
+```
+Copy the header to ``/usr/local/lib``
+
+```bash
+> clang useadd.c -ladd -L/usr/local/lib -o useadd 
+> ./useadd
+f1: 1;   main 2
+f2: 10;   main 12
+>
+```
+
+I don't seem to need the ``-I`` flag.
+
 

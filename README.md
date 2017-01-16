@@ -48,9 +48,15 @@ So here is a list of the short focused items we'll cover.
 
 * a C [dynamic library](files/dynamic_library.md)
 
-* dynamic library in [~/Library/Frameworks](files/dynamic_library_in_FW.md) from the command line
+* dynamic library in ``~/Library/Frameworks`` or [/usr/local/lib](files/dynamic_library_in_FW.md) from the command line
 
 For the difference between static and dynamic libraries see [here](http://stackoverflow.com/questions/2649334).  The main difference is that a dynamic library can be shared between different programs, and its code isn't actually present in the object code.
+
+<hr>
+
+### Homebrew
+
+[not written yet]
 
 <hr>
 
