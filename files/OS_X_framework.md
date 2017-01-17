@@ -1,4 +1,4 @@
-#### Method 8:  Use a standard OS X framework from the command line:
+#### Use a standard OS X framework from the command line:
 
 **test.m**
 

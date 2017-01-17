@@ -1,4 +1,4 @@
-#### Method:  Dynamic library in ~/Library/Frameworks or /usr/local/lib
+#### Method 8:  Dynamic library in ~/Library/Frameworks or /usr/local/lib
 
 We would like to be able to copy ``libadd.dylib`` to the Frameworks directory and import it like we did before. 
 

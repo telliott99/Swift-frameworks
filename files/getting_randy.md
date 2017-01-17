@@ -1,27 +1,22 @@
 #### Random numbers
 
-This is not numbered as a method, but it seems to fit here.  In Swift3, the venerable C functions ``rand`` and ``srand`` have been made "unavailable in Swift".
+In Swift3, the venerable C functions ``rand`` and ``srand`` have been made "unavailable in Swift".
 
-While I'm sure there are good reasons for this (namely cryptographic safety), it's bad for hobbyist programmers because the preferred function ``arc4random`` is not seedable --- by design.
+While I'm sure there are good reasons for this (namely, cryptographic safety), it's bad for hobbyist programmers because the preferred function that is made available --- ``arc4random`` --- is not seedable, by design.
 
-I think it's much better to have "random" numbers reproducible between runs, when testing new code, rather than insist on safety in this case.
+I think it's a really good thing to have "random" numbers reproducible between runs when testing new code, rather than insist on safety in this case.
 
 Here is how to recover these functions for use in your Swift code.
 
-First, we simply "wrap" the C library functions.
+First, we "wrap" the C library functions into our own C code.
 
 **funcs.c**
 
 ```c
 #import <stdlib.h>
 
-int rand2() {
-    return rand();
-}
-
-void srand2(int x) {
-    srand(x);
-}
+int rand2() { return rand(); }
+void srand2(int x) { srand(x); }
 
 ```
 
@@ -34,7 +29,7 @@ int rand2();
 void srand2(int x);
 ```
 
-And we test by calling from:
+We test by calling from:
 
 **test.c**
 
@@ -58,7 +53,7 @@ int main(int argc, char** argv){
 }
 
 ```
-We do a quick test from the command line:
+A quick test from the command line:
 
 ```bash
 > clang -g -Wall -c funcs.c
@@ -79,18 +74,18 @@ Having seeded the PRNG, we get the same three random numbers (mod 500) for two r
 
 Now, one approach would be to turn this into an Objective-C framework.
 
-Make a new Cocoa project called **MyRand**, a framework, in Objective-C.  
+Make a new Cocoa project called **RandFW**, a framework, with the language set to Objective-C.  
 
 Copy ``funcs.c`` to the directory in the project that holds source files.  From Xcode, add the file to the project (with the folder selected, not the project).
 
-Copy these declarations into ``MyRand.h``
+Copy these declarations into ``RandFW.h``
 
 ```c
 void srand2(int x);
 int rand2();
 ```
 
-just after
+Place the declarations just after
 
 ```c
 #import <Cocoa/Cocoa.h>
@@ -98,12 +93,12 @@ just after
 
 Build the framework.
 
-Copy it into ``~/Library/Frameworks``.
+Using the Show in Finder trick, copy it into ``~/Library/Frameworks``.
 
-Call it from C code on the command line:
+Call from C code on the command line:
 
 ```bash
-> clang -g -o prog -F ~/Library/Frameworks/ -framework MyRand test.c -I ~/Library/Frameworks/AdderOC.framework/Headers
+> clang -g -o prog -F ~/Library/Frameworks/ -framework RandFW test.c -I ~/Library/Frameworks/RandFW.framework/Headers
 > ./prog
 331
 118
@@ -122,7 +117,7 @@ Now write
 **test.swift**
 
 ```swift
-import MyRand
+import RandFW
 
 srand2(133)
 for _ in 0..<3 {
@@ -152,4 +147,4 @@ Int32
 ```
 I think those numbers look familiar.
 
-These functions are available in a Swift Cocoa app.  To use them in a Playground is more work, but we'll get there eventually.
+These functions are also available in a Swift Cocoa app.  To use them in a Playground is more work, but we'll get there eventually.  See the very last section.

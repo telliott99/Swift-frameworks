@@ -1,4 +1,4 @@
-#### Method 10:  Import an Objective-C framework from a Swift program executing on the command line.  
+#### Import an Objective-C framework from a Swift program executing on the command line.  
 
 **test.swift**
 

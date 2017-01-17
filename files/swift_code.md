@@ -1,4 +1,4 @@
-#### Method 12:  Swift framework called from Swift at the command line
+#### Swift framework called from Swift at the command line
 
 Even for small projects, it is nice to have the ability to split up your code into several files.
 

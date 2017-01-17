@@ -1,4 +1,4 @@
-####Method 5:  Objective-C app
+#### Method 5:  Objective-C app
 
 * Now, make a new Xcode project, a Cocoa app called **UseStaticLib** on the Desktop, choose **Objective-C** for the language. 
 

@@ -1,4 +1,4 @@
-#### Method 10:  Objective-C framework from a Swift Cocoa app.
+#### Objective-C framework from a Swift Cocoa app.
 
 The basics: start a new Xcode project in Swift and call it MyApp. 
 

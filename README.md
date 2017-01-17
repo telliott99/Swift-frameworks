@@ -48,21 +48,25 @@ So here is a list of the short focused items we'll cover.
 
 * a C [dynamic library](files/dynamic_library.md)
 
-* dynamic library in ``~/Library/Frameworks`` or [/usr/local/lib](files/dynamic_library_in_FW.md) from the command line
+* [dynamic library](files/dynamic_library_in_FW.md) in [/usr/local/lib] or ``~/Library/Frameworks``, from the command line
 
-For the difference between static and dynamic libraries see [here](http://stackoverflow.com/questions/2649334).  The main difference is that a dynamic library can be shared between different programs, and its code isn't actually present in the object code.
+For the difference between static and dynamic libraries see [here](http://stackoverflow.com/questions/2649334). 
+
+The main difference is that a dynamic library can be shared between different programs, and its code isn't actually present in the object code.
 
 <hr>
 
 ### Homebrew
+
+One value in looking at these older ways of doing things is just to have some insight into what a library is.
+
+Also, a number of libraries are available for macOS through various package managers including Homebrew.
 
 [not written yet]
 
 <hr>
 
 ### Objective-C frameworks:
-
-It's only worth looking at these older ways of doing things to have some insight into what a library is.
 
 The modern way on macOS is to use a Framework.
 
@@ -76,7 +80,7 @@ I found an [article](https://pewpewthespells.com/blog/convert_static_to_dynamic.
 
 ### Swift calling Objective-C frameworks
 
-* [Getting](files/getting_randy.md) the rand function back into Swift.
+* Getting a (seedable) [rand](files/getting_randy.md) function back into Swift.
 
 * [Objective-C framework](files/num10.md) including our C files called by Swift on the command line.
 
@@ -97,3 +101,5 @@ I found an [article](https://pewpewthespells.com/blog/convert_static_to_dynamic.
 *  Swift code in an Xcode [Playground](files/playground.md)
 
 *  Adding a Swift framework to an Xcode [Playground](files/PG+framework.md)
+
+<hr>
