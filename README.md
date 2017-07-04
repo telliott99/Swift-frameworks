@@ -82,6 +82,8 @@ I found an [article](https://pewpewthespells.com/blog/convert_static_to_dynamic.
 
 * Getting a (seedable) [rand](files/getting_randy.md) function back into Swift.
 
+* Using the RandFW framework to make a command line [demo](files/Encoder.md) for encryption and decryption.
+
 * [Objective-C framework](files/num10.md) including our C files called by Swift on the command line.
 
 * [Objective-C framework](files/num8.md) including our C files called from a Swift Cocoa app.
